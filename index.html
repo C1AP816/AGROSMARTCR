@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgroSmart - Expo Técnica 2025</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header>
+    <h1 id="titulo">AgroSmart - Expo Técnica 2025</h1>
+    <p id="descripcion">Fundada en 2025 para presentar soluciones tecnológicas en la Expo Técnica del CTP Santa Ana.</p>
+    <div class="idioma-container">
+      <label for="idioma">🌍 Idioma:</label>
+      <select id="idioma" onchange="cambiarIdioma()">
+        <option value="es">Español</option>
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+        <option value="de">Deutsch</option>
+        <option value="it">Italiano</option>
+      </select>
+    </div>
+  </header>
+
+  <nav>
+    <button onclick="mostrarSeccion('inicio')">Inicio</button>
+    <button onclick="mostrarSeccion('calendario')">Calendario Lunar</button>
+    <button onclick="mostrarSeccion('inventario')">Inventario</button>
+    <button onclick="mostrarSeccion('siembra')">Fechas de Siembra</button>
+    <button onclick="mostrarSeccion('cosechas')">Registro de Cosechas</button>
+  </nav>
+
+  <main>
+    <section id="inicio" class="active">
+      <h2 id="bienvenida">Bienvenido</h2>
+      <p id="textoInicio">Esta plataforma organiza cultivos, consulta fases lunares, registra siembras y exporta datos agrícolas.</p>
+    </section>
+
+    <section id="calendario">
+      <h2>Calendario Lunar</h2>
+      <iframe src="https://www.moongiant.com/phase/today/"></iframe>
+    </section>
+
+    <section id="inventario">
+      <h2>Inventario</h2>
+      <form onsubmit="guardarRegistro(event, 'listaInventario', 'nombreCultivo', 'cantidad')">
+        <input type="text" id="nombreCultivo" placeholder="Nombre del cultivo" required />
+        <input type="number" id="cantidad" placeholder="Cantidad" required />
+        <button type="submit">Guardar</button>
+      </form>
+      <ul id="listaInventario"></ul>
+      <div class="export-group">
+        <button onclick="exportarPDF('listaInventario')">📄 PDF</button>
+        <button onclick="exportarExcel('listaInventario')">📊 Excel</button>
+        <button onclick="exportarPNG('listaInventario')">🖼️ PNG</button>
+      </div>
+    </section>
+
+    <section id="siembra">
+      <h2>Fechas de Siembra</h2>
+      <ul id="listaSiembra"></ul>
+      <div class="export-group">
+        <button onclick="exportarPDF('listaSiembra')">📄 PDF</button>
+        <button onclick="exportarExcel('listaSiembra')">📊 Excel</button>
+        <button onclick="exportarPNG('listaSiembra')">🖼️ PNG</button>
+      </div>
+    </section>
+
+    <section id="cosechas">
+      <h2>Registro de Cosechas</h2>
+      <form onsubmit="guardarRegistro(event, 'listaCosechas', 'cultivo', 'cantidadCosechada', 'fecha')">
+        <input type="text" id="cultivo" placeholder="Cultivo cosechado" required />
+        <input type="number" id="cantidadCosechada" placeholder="Cantidad" required />
+        <input type="date" id="fecha" required />
+        <button type="submit">Registrar</button>
+      </form>
+      <ul id="listaCosechas"></ul>
+      <div class="export-group">
+        <button onclick="exportarPDF('listaCosechas')">📄 PDF</button>
+        <button onclick="exportarExcel('listaCosechas')">📊 Excel</button>
+        <button onclick="exportarPNG('listaCosechas')">🖼️ PNG</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/scripts.js"></script>
+</body>
+</html>
